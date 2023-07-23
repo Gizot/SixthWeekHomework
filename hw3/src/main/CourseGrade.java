@@ -41,11 +41,14 @@ public class CourseGrade {
     }
 
     public void setCourseDepartment(String courseDepartment) {
-        if (courseDepartment.equals("CENG") || courseDepartment.equals("COMP") || courseDepartment.equals("ECE") || courseDepartment.equals("ME") || courseDepartment.equals("MATH")) {
-            this.courseDepartment = courseDepartment;
-        } else {
-            this.courseDepartment = "CENG"; // Default value
+        String[] validValues = {"CENG", "COMP", "ECE", "ME", "MATH"};
+        for (int i = 0; i < validValues.length; i++) {
+            if (courseDepartment.toUpperCase().equals(validValues[i])) {
+                this.courseDepartment = courseDepartment;
+                return;
+            }
         }
+        this.courseDepartment = "CENG";
     }
 
     public int getCourseCode() {
@@ -55,6 +58,7 @@ public class CourseGrade {
     public void setCourseCode(int courseCode) {
         if (courseCode >= 100 && courseCode <= 599) {
             this.courseCode = courseCode;
+
         } else {
             this.courseCode = 100; // Default value
         }
@@ -120,9 +124,10 @@ public class CourseGrade {
 
     @Override
     public String toString() {
-        return "Department: " + courseDepartment +
-                " CourseCode: " + courseCode + " Credit: " +
-                courseCredit + " Grade: " + gradeTaken.getStringValue() + "\n";
+        return "Department: " + this.courseDepartment +
+                " Code: " + this.courseCode +
+                " Credit: " + this.courseCredit +
+                " Grade: " + this.gradeTaken.getStringValue();
     }
 
 }

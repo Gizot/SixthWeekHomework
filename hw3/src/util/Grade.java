@@ -10,12 +10,16 @@ public enum Grade {
     Bu sınıf için toString() metodu uygulanmalıdır. Örneğin, Grade.F için şöyle yazdırılmalıdır: "Grade F, sayısal notu 0'a karşılık gelir."
     Şartlarını sağlayacak şekilde "Grade" isimli Enum class oluşturulmuştur.
      */
-    A("A", 4), B("B", 3), C("C", 2), D("D", 1), F("F", 0);
+    F("F", 0),
+    D("D", 1),
+    C("C", 2),
+    B("B", 3),
+    A("A", 4);
 
     private String stringValue;
     private int numericValue;
 
-    private Grade(String stringValue, int numericValue) {
+    Grade(String stringValue, int numericValue) {
         this.stringValue = stringValue;
         this.numericValue = numericValue;
     }
@@ -30,7 +34,7 @@ public enum Grade {
 
     @Override
     public String toString() {
-        return "Grade " + stringValue + " corresponds to numeric grade " + numericValue;
+        return "Grade " + this.stringValue + " corresponds to numeric grade " + this.numericValue;
     }
 }
 
