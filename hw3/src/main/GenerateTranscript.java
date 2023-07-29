@@ -23,13 +23,16 @@ public class GenerateTranscript {
         // Transkript nesnesi oluşturulur ve öğrenci kimliği ile başlatılır
         Transcript transcript = new Transcript(studentId);
 
-        while (true) {
-            System.out.println("Enter Department (or 'finish' to finish):");
+        System.out.println("Enter Department (or press Ctrl+d/Cmd+D to finish):");
+
+        while (scanner.hasNextLine()) {
+
             // Kullanıcıdan ders bölümü bilgisini alırız
             String department = scanner.nextLine();
+            System.out.println("DEBUG: Department input: " + department);
 
-            if (department.equalsIgnoreCase("finish")) {
-                // Eğer kullanıcı "endoffile" girerse, döngüden çıkarız ve veri girişini tamamlamış oluruz
+            // Ctrl+D (Unix/Linux) veya Ctrl+Z (Windows) tuşlarına basıldığında döngüden çıkarız
+            if (department == null || department.isEmpty()) {
                 break;
             }
 
@@ -63,6 +66,7 @@ public class GenerateTranscript {
             // CourseGrade nesnesini oluşturur ve transkript nesnesine ekleriz
             CourseGrade courseGrade = new CourseGrade(department, courseCode, credit, grade);
             transcript.addCourseTaken(courseGrade);
+            System.out.println("Enter Department (or press Ctrl+D to finish):");
         }
 
         // Scanner kapatılır ve oluşturulan transkript nesnesi döndürülür
