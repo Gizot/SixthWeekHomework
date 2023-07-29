@@ -41,6 +41,8 @@ public class Transcript {
         } else {
             GPA = 0.0;
         }
+
+
     }
 
 
