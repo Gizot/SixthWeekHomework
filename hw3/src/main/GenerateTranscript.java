@@ -29,7 +29,7 @@ public class GenerateTranscript {
 
             // Kullanıcıdan ders bölümü bilgisini alırız
             String department = scanner.nextLine();
-            System.out.println("DEBUG: Department input: " + department);
+            System.out.println("Departman adı : " + department);
 
             // Ctrl+D (Unix/Linux) veya Ctrl+Z (Windows) tuşlarına basıldığında döngüden çıkarız
             if (department == null || department.isEmpty()) {
@@ -137,7 +137,7 @@ public class GenerateTranscript {
         System.out.println("Enter '1' to take input from user or '2' to take input from a file:");
         // Kullanıcıdan seçim yapmasını isteriz
         int choice = scanner.nextInt();
-        scanner.nextLine(); // Yeni satır karakterini tüketir (nextInt() ardından nextLine() hatasını önlemek için)
+        scanner.nextLine(); // Yeni satır karakterini tükettik.(nextInt() ardından nextLine() hatasını önlemek için)
 
         Transcript transcript;
 
