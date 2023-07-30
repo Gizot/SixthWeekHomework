@@ -77,7 +77,7 @@ public class GenerateTranscript {
     // Method to take input from a text file and create a transcript object
     public static Transcript takeInputFromFile(String filename) {
         // Dosya işlemleri için File ve Scanner sınıflarını kullanırız
-        File file = new File(filename);
+        File file = new File(filename + ".txt");
         Scanner scanner;
         try {
             scanner = new Scanner(file);
@@ -96,33 +96,20 @@ public class GenerateTranscript {
 
         while (scanner.hasNextLine()) {
             // Dosyada bir sonraki satır varsa, satırı alır ve boşluklara göre parçalara böleriz
-            String line = scanner.nextLine();
-            String[] tokens = line.split(" ");
+            String lineData = scanner.nextLine();
+            String[] tokens = lineData.split(" ");
             if (tokens.length == 4) {
                 // Parçalardan bölüm, ders kodu, kredi ve harf notunu alırız
                 String department = tokens[0];
                 int courseCode = Integer.parseInt(tokens[1]);
                 int credit = Integer.parseInt(tokens[2]);
-                String gradeString = tokens[3].toUpperCase();
-
-                Grade grade = Grade.F; // Default value (varsayılan değer)
-
-                // Harf notunu Grade enum sabitine dönüştürürüz
-                if (gradeString.equals("A")) {
-                    grade = Grade.A;
-                } else if (gradeString.equals("B")) {
-                    grade = Grade.B;
-                } else if (gradeString.equals("C")) {
-                    grade = Grade.C;
-                } else if (gradeString.equals("D")) {
-                    grade = Grade.D;
-                } else if (gradeString.equals("F")) {
-                    grade = Grade.F;
-                }
+                double grade = Double.valueOf(tokens[3]);
 
                 // CourseGrade nesnesini oluşturur ve transkript nesnesine ekleriz
                 CourseGrade courseGrade = new CourseGrade(department, courseCode, credit, grade);
                 transcript.addCourseTaken(courseGrade);
+            } else {
+                System.out.println("Wrong file format ! Please check file format.");
             }
         }
 
@@ -131,40 +118,5 @@ public class GenerateTranscript {
         return transcript;
     }
 
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-
-        System.out.println("Enter '1' to take input from user or '2' to take input from a file:");
-        // Kullanıcıdan seçim yapmasını isteriz
-        int choice = scanner.nextInt();
-        scanner.nextLine(); // Yeni satır karakterini tükettik.(nextInt() ardından nextLine() hatasını önlemek için)
-
-        Transcript transcript;
-
-        if (choice == 1) {
-            // Kullanıcı 1 seçerse, kullanıcıdan veri alarak transkript oluştururuz
-            transcript = takeInputFromUser();
-        } else if (choice == 2) {
-            System.out.println("Enter filename (or 'endoffile' to finish):");
-            // Kullanıcı 2 seçerse, dosya adını alırız
-            String filename = scanner.nextLine();
-            if (filename.equalsIgnoreCase("endoffile")) {
-                // Eğer kullanıcı "endoffile" girerse, geçersiz dosya adı olduğunu belirtiriz ve programı sonlandırırız
-                System.out.println("Invalid filename.");
-                return;
-            }
-            // Dosyadan veri alarak transkript oluştururuz
-            transcript = takeInputFromFile(filename);
-        } else {
-            // Kullanıcı geçersiz bir seçim yaparsa, uygun mesajı gösterir ve programı sonlandırırız
-            System.out.println("Invalid choice.");
-            return;
-        }
-
-        // Oluşturulan transkript nesnesini ekrana yazdırırız (toString metodu otomatik olarak çağrılır)
-        if (transcript != null) {
-            System.out.println(transcript.toString());
-        }
-    }
 }
 

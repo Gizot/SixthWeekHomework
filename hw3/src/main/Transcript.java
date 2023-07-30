@@ -16,6 +16,8 @@ public class Transcript {
         this.courseGrades = new ArrayList<>();
     }
 
+
+
     public void addCourseTaken(CourseGrade courseGrade) {
         if(courseGrade != null){
             this.courseGrades.add(courseGrade);

@@ -35,6 +35,12 @@ public class CourseGrade {
         setCourseCredit(courseCredit);
         setGradeTaken(gradeTaken);
     }
+    public CourseGrade(String courseDepartment, int courseCode, int courseCredit, double gradeTaken) {
+        setCourseDepartment(courseDepartment);
+        setCourseCode(courseCode);
+        setCourseCredit(courseCredit);
+        setGradeTaken(gradeTaken);
+    }
 
     public String getCourseDepartment() {
         return courseDepartment;
